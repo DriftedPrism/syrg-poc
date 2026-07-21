@@ -4,9 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Switchyard Run Club</title>
-  
-  <!-- FullCalendar CSS & JS -->
-  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
 
   <style>
     :root {
@@ -21,7 +18,7 @@
     body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: var(--bg); color: var(--text); line-height: 1.6; }
     
     header { text-align: center; padding: 3rem 1rem; background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%); }
-    header h1 { font-size: 2.5rem; color: var(--primary); }
+    header h1 { font-size: 2.5rem; color: var(--primary); margin-bottom: 0.5rem; }
     header p { color: var(--muted); font-size: 1.1rem; }
 
     main { max-width: 900px; margin: 0 auto; padding: 2rem 1rem; }
@@ -31,64 +28,61 @@
       border-radius: 12px;
       padding: 1.5rem;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-      margin-bottom: 2rem;
     }
 
-    /* FullCalendar Styling Tweaks */
-    .fc { color: var(--text); }
-    .fc-theme-standard td, .fc-theme-standard th { border-color: #334155; }
-    .fc-button-primary { background-color: var(--primary) !important; border-color: var(--primary) !important; }
-    .fc-event { cursor: pointer; border-radius: 4px; padding: 2px 4px; }
+    .schedule-card h2 {
+      margin-bottom: 1rem;
+    }
+
+    /* Responsive Google Calendar Container */
+    .calendar-container {
+      position: relative;
+      padding-bottom: 75%; /* Aspect ratio */
+      height: 0;
+      overflow: hidden;
+      border-radius: 8px;
+    }
+
+    .calendar-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    @media (max-width: 600px) {
+      .calendar-container {
+        padding-bottom: 125%; /* Taller aspect ratio for mobile screens */
+      }
+    }
   </style>
 </head>
 <body>
 
   <header>
-    <h1>🏃 Switchyard Run Run Club</h1>
-    <p>All paces welcome. Join us!</p>
+    <h1>🏃 Switchyard Run Club</h1>
+    <p>All paces welcome. Join us for weekly community runs!</p>
   </header>
 
   <main>
     <section class="schedule-card">
-      <h2 style="margin-bottom: 1rem;">Upcoming Runs & Events</h2>
-      <div id="calendar"></div>
+      <h2>Upcoming Runs & Events</h2>
+      
+      <div class="calendar-container">
+        <!-- Replace YOUR_CALENDAR_ID@gmail.com with your actual public Google Calendar ID -->
+        <iframe 
+          src="https://calendar.google.com/calendar/embed?showTitle=0&amp;showNav=1&amp;showDate=1&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;showTz=1&amp;mode=AGENDA&amp;src=YOUR_CALENDAR_ID@gmail.com&amp;color=%23ff4500" 
+          style="border: 0" 
+          width="800" 
+          height="600" 
+          frameborder="0" 
+          scrolling="no">
+        </iframe>
+      </div>
     </section>
   </main>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      var calendarEl = document.getElementById('calendar');
-      var calendar = new FullCalendar.Calendar(calendarEl, {
-        initialView: 'dayGridMonth',
-        headerToolbar: {
-          left: 'prev,next today',
-          center: 'title',
-          right: 'dayGridMonth,timeGridWeek'
-        },
-        events: [
-          {
-            title: 'Monday',
-            start: '2026-07-21T18:30:00',
-            color: '#ff4500'
-          },
-          {
-            title: 'Tuesday Trail',
-            start: '2026-07-23T19:00:00',
-            color: '#3b82f6'
-          },
-          {
-            title: 'Thursday',
-            start: '2026-07-25T08:00:00',
-            color: '#10b981'
-          }
-        ],
-        eventClick: function(info) {
-          alert('Event: ' + info.event.title + '\nStart: ' + info.event.start.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}));
-        }
-      });
-      calendar.render();
-    });
-  </script>
 
 </body>
 </html>
