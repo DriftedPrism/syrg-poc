@@ -1,0 +1,142 @@
+:root {
+  --primary: #ff4500;
+  --bg: #0f172a;
+  --card: #1e293b;
+  --text: #f8fafc;
+  --muted: #94a3b8;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: var(--bg); color: var(--text); line-height: 1.6; }
+
+header { text-align: center; padding: 3rem 1rem 2rem; background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%); }
+header h1 { font-size: 2.5rem; color: var(--primary); margin-bottom: 0.5rem; }
+header p { color: var(--muted); font-size: 1.1rem; }
+
+main { max-width: 900px; margin: 0 auto; padding: 2rem 1rem; }
+
+h2 { font-size: 1.5rem; margin-bottom: 1rem; }
+
+/* Weekly Runs Grid */
+.runs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 2.5rem;
+}
+
+.run-card {
+  background: var(--card);
+  border-radius: 12px;
+  padding: 1.5rem;
+  border-top: 4px solid var(--primary);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.run-card h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.run-card .tag {
+  display: inline-block;
+  background: rgba(255, 69, 0, 0.15);
+  color: var(--primary);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.25rem 0.6rem;
+  border-radius: 20px;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+}
+
+.run-card ul {
+  list-style: none;
+}
+
+.run-card li {
+  margin-bottom: 0.4rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.run-card li strong {
+  color: var(--text);
+}
+
+/* Google Calendar Section */
+.schedule-card {
+  background: var(--card);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive Google Calendar Container */
+.calendar-container {
+  position: relative;
+  padding-bottom: 75%; /* Aspect ratio */
+  height: 0;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.calendar-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.photos-section {
+  margin-top: 2rem;
+}
+
+.photos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.photo-card {
+  background: var(--card);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.photo-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+}
+
+.photo-card figcaption {
+  padding: 1rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.photos-link {
+  display: inline-block;
+  margin: 0.5rem 0 1rem;
+  padding: 0.7rem 1rem;
+  background: var(--primary);
+  color: white;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+@media (max-width: 600px) {
+  .calendar-container {
+    padding-bottom: 125%; /* Taller aspect ratio for mobile screens */
+  }
+}
