@@ -148,13 +148,10 @@
                 container.appendChild(ph);
                 openLink.href = buildLinkUrl(id);
                 openLink.style.display = '';
-                // Ensure base embed script is present
                 ensureEmbedScript();
-                // Re-run the embed processing for newly inserted placeholder by appending a cache-busted script tag
-                const s2 = document.createElement('script');
-                s2.src = 'https://strava-embeds.com/embed.js?cb=' + Date.now();
-                s2.async = true;
-                document.body.appendChild(s2);
+                if (window.__STRAVA_EMBED_BOOTSTRAP__) {
+                  window.__STRAVA_EMBED_BOOTSTRAP__();
+                }
               } else {
             openLink.href = '#';
             openLink.style.display = 'none';
