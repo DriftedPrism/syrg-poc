@@ -3,16 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Switchyard Run Club</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
   <header>
-    <h1>🏃 Switchyard Run Club</h1>
-    <p>All paces welcome. Join us for weekly community runs!</p>
+    <img class="site-logo" src="syrg-logo.jpg" alt="SYRG logo">
   </header>
-
   <main>
     <!-- Weekly Run Boxes Section -->
     <section>
@@ -49,7 +46,7 @@
           <h3>Run and Friendly Beasts</h3>
           <ul>
             <li><strong>Time:</strong> 6:00 PM</li>
-            <li><strong>Distance:</strong> 1.5, 3, and 5 Mile options</li></li>
+            <li><strong>Distance:</strong> 1.5, 3, and 5 Mile options</li>
             <li><strong>Pace:</strong> Casual / Walkers Welcome</li>
             <li><strong>Location:</strong> Switchyard Park Pavilion</li>
           </ul>
@@ -58,17 +55,119 @@
       </div>
     </section>
 
+    <!-- Strava Routes (select and embed) -->
+    <section class="schedule-card" id="strava-routes-section">
+      <h2>Route Maps</h2>
+      <p>Select a route to view its Strava map below.</p>
+
+      <div style="display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;">
+        <label for="route-select" style="color:var(--muted);font-weight:600;">Route:</label>
+        <select id="route-select" style="padding:0.5rem;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--text);">
+          <option value="1.5">1.5 Mile</option>
+          <option value="3">3 Mile</option>
+          <option value="5">5 Mile</option>
+          <option value="trail">Trail</option>
+        </select>
+        <a id="route-open" class="photos-link" href="https://www.strava.com/routes/2978042905243243068" target="_blank" rel="noopener noreferrer">Open in Strava</a>
+      </div>
+
+      <div class="strava-route-embed" id="strava-embed-container" style="margin-top:1rem;">
+        <!-- Strava embed placeholder will be inserted here -->
+      </div>
+    </section>
+
+  
     <!-- Google Calendar Section -->
     <section class="schedule-card">
-      <h2>Full Calendar & Events</h2>
-      
+    <h2>Calendar</h2>  
       <div class="calendar-container">
-        <!-- Replace YOUR_CALENDAR_ID@gmail.com with your actual public Google Calendar ID -->
         <iframe src="https://calendar.google.com/calendar/embed?src=f6f5276bd8d6423478ad5abba3d18c800d85a871124dbcc118df25c203534f7d%40group.calendar.google.com&ctz=America%2FIndiana%2FIndianapolis" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
       </div>
     </section>
 
   </main>
 
+  <script>
+    (function(){
+      // Load route IDs from route_id.json and inject Strava embed placeholders
+      const routeFile = 'route_id.json';
+      const select = document.getElementById('route-select');
+      const container = document.getElementById('strava-embed-container');
+      const openLink = document.getElementById('route-open');
+      let embedScriptAppended = false;
+
+      function buildLinkUrl(id) {
+        return `https://www.strava.com/routes/${id}`;
+      }
+
+      function createPlaceholder(id) {
+        const div = document.createElement('div');
+        div.className = 'strava-embed-placeholder';
+        div.setAttribute('data-embed-type', 'route');
+        div.setAttribute('data-embed-id', id);
+        div.setAttribute('data-style', 'standard');
+        div.setAttribute('data-from-embed', 'true');
+        return div;
+      }
+
+      function ensureEmbedScript() {
+        if (embedScriptAppended) return;
+        // Append the Strava embed script once
+        const s = document.createElement('script');
+        s.src = 'https://strava-embeds.com/embed.js';
+        s.async = true;
+        s.onload = () => { embedScriptAppended = true; };
+        document.body.appendChild(s);
+      }
+
+      fetch(routeFile).then(r=>r.json()).then(data=>{
+        function applySelection() {
+          const key = select.value;
+          const entry = data[key];
+          container.innerHTML = '';
+
+          let id = '';
+          let mapHash = '';
+
+          if (!entry) {
+            openLink.href = '#';
+            openLink.style.display = 'none';
+            return;
+          }
+
+          if (typeof entry === 'string') {
+            id = entry;
+          } else if (typeof entry === 'object') {
+            id = entry.id || entry.route || '';
+            mapHash = entry.map_hash || entry.mapHash || '';
+          }
+
+              if (id) {
+                const ph = createPlaceholder(id);
+                if (mapHash) ph.setAttribute('data-map-hash', mapHash);
+                container.appendChild(ph);
+                openLink.href = buildLinkUrl(id);
+                openLink.style.display = '';
+                // Ensure base embed script is present
+                ensureEmbedScript();
+                // Re-run the embed processing for newly inserted placeholder by appending a cache-busted script tag
+                const s2 = document.createElement('script');
+                s2.src = 'https://strava-embeds.com/embed.js?cb=' + Date.now();
+                s2.async = true;
+                document.body.appendChild(s2);
+              } else {
+            openLink.href = '#';
+            openLink.style.display = 'none';
+          }
+        }
+
+        select.addEventListener('change', applySelection);
+        applySelection();
+      }).catch(err=>{
+        console.warn('Could not load route_id.json', err);
+      });
+    })();
+  </script>
+  <script src="https://strava-embeds.com/embed.js" async defer></script>
 </body>
 </html>

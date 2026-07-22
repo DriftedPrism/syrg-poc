@@ -1,17 +1,25 @@
 :root {
-  --primary: #ff4500;
-  --bg: #0f172a;
-  --card: #1e293b;
-  --text: #f8fafc;
-  --muted: #94a3b8;
+  --primary: #8ecf4f;
+  --bg: #ffffff;
+  --card: #ffffff;
+  --text: #07203b;
+  --muted: #5d7b98;
+  --border: rgba(142, 207, 79, 0.16);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: var(--bg); color: var(--text); line-height: 1.6; }
 
-header { text-align: center; padding: 3rem 1rem 2rem; background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%); }
+header { text-align: center; padding: 3rem 1rem 2rem; background: linear-gradient(180deg, #f2fbff 0%, #ffffff 100%); }
 header h1 { font-size: 2.5rem; color: var(--primary); margin-bottom: 0.5rem; }
 header p { color: var(--muted); font-size: 1.1rem; }
+
+.site-logo {
+  display: block;
+  margin: 0 auto 1.25rem;
+  max-width: 320px;
+  width: 100%;
+}
 
 main { max-width: 900px; margin: 0 auto; padding: 2rem 1rem; }
 
@@ -30,7 +38,7 @@ h2 { font-size: 1.5rem; margin-bottom: 1rem; }
   border-radius: 12px;
   padding: 1.5rem;
   border-top: 4px solid var(--primary);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
 }
 
 .run-card h3 {
@@ -40,7 +48,7 @@ h2 { font-size: 1.5rem; margin-bottom: 1rem; }
 
 .run-card .tag {
   display: inline-block;
-  background: rgba(255, 69, 0, 0.15);
+  background: rgba(142, 207, 79, 0.16);
   color: var(--primary);
   font-size: 0.8rem;
   font-weight: 600;
@@ -69,7 +77,9 @@ h2 { font-size: 1.5rem; margin-bottom: 1rem; }
   background: var(--card);
   border-radius: 12px;
   padding: 1.5rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--border);
+  border: 1px solid var(--border);
 }
 
 /* Responsive Google Calendar Container */
@@ -129,10 +139,57 @@ h2 { font-size: 1.5rem; margin-bottom: 1rem; }
   margin: 0.5rem 0 1rem;
   padding: 0.7rem 1rem;
   background: var(--primary);
-  color: white;
+  color: #07203b;
   border-radius: 999px;
   text-decoration: none;
   font-weight: 600;
+}
+
+.strava-section {
+  margin-top: 2rem;
+}
+
+.strava-card {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem;
+  background: linear-gradient(135deg, rgba(255, 69, 0, 0.18), rgba(255, 69, 0, 0.06));
+  border: 1px solid rgba(255, 69, 0, 0.25);
+  border-radius: 12px;
+}
+
+.strava-card p {
+  color: var(--muted);
+  margin-top: 0.25rem;
+}
+
+.strava-button {
+  display: inline-block;
+  padding: 0.8rem 1rem;
+  background: #fc4c02;
+  color: white;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.strava-embed {
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+  border-radius: 12px;
+  background: var(--card);
+  padding: 0.75rem;
+}
+
+.strava-embed iframe {
+  width: 100%;
+  min-height: 420px;
+  border: 0;
+  border-radius: 8px;
 }
 
 @media (max-width: 600px) {
