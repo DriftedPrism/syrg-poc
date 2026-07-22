@@ -10,19 +10,19 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: var(--bg); color: var(--text); line-height: 1.6; }
 
-header { text-align: center; padding: 3rem 1rem 2rem; background: linear-gradient(180deg, #f2fbff 0%, #ffffff 100%); }
+header { text-align: center; padding: 3rem 1rem 0.9rem; background: linear-gradient(180deg, #f2fbff 0%, #ffffff 100%); }
 header h1 { font-size: 2.5rem; color: var(--primary); margin-bottom: 0.5rem; }
 header p { color: var(--muted); font-size: 1.1rem; }
 
 .site-logo {
   display: block;
-  margin: 0 auto 1.25rem;
+  margin: 0 auto 0.6rem;
   max-width: 320px;
   width: 100%;
   height: auto;
 }
 
-main { max-width: 900px; margin: 0 auto; padding: 2rem 1rem; }
+main { max-width: 900px; margin: 0 auto; padding: 1rem 1rem; }
 
 h2 { font-size: 1.5rem; margin-bottom: 1rem; }
 
