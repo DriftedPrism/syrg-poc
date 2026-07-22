@@ -11,47 +11,51 @@
     <img class="site-logo" src="syrg-logo.png" alt="SYRG logo">
   </header>
   <main>
-    <!-- Weekly Run Boxes Section -->
-    <section>
+    <!-- Weekly Run Boxes Carousel Section -->
+    <section class="carousel-section">
       <h2>Weekly Schedule</h2>
-      <div class="runs-grid">
-        
-        <!-- Monday Box -->
-        <div class="run-card">
-          <span class="tag">Monday</span>
-          <h3>Run</h3>
-          <ul>
-            <li><strong>Time:</strong> 6:00 PM</li>
-            <li><strong>Distance:</strong> 1.5, 3, and 5 Mile options</li>
-            <li><strong>Pace:</strong> All Paces / Conversational</li>
-            <li><strong>Location:</strong> Switchyard Park Pavilion</li>
-          </ul>
-        </div>
+      <div class="runs-carousel">
+        <button class="carousel-button prev" type="button" aria-label="Previous run">‹</button>
+        <div class="carousel-track-wrapper" tabindex="0">
+          <div class="runs-grid">
+            <!-- Monday Box -->
+            <div class="run-card">
+              <span class="tag">Monday</span>
+              <h3>Run</h3>
+              <ul>
+                <li><strong>Time:</strong> 6:00 PM</li>
+                <li><strong>Distance:</strong> 1.5, 3, and 5 Mile options</li>
+                <li><strong>Pace:</strong> All Paces / Conversational</li>
+                <li><strong>Location:</strong> Switchyard Park Pavilion</li>
+              </ul>
+            </div>
 
-        <!-- Tuesday Box -->
-        <div class="run-card">
-          <span class="tag">Tuesday</span>
-          <h3>Trails</h3>
-          <ul>
-            <li><strong>Time:</strong> 6:00 PM</li>
-            <li><strong>Distance:</strong> 4 – 5 Miles</li>
-            <li><strong>Pace:</strong> Fast / Moderate Groups</li>
-            <li><strong>Location:</strong> Griffy Lake Boat House</li>
-          </ul>
-        </div>
+            <!-- Tuesday Box -->
+            <div class="run-card">
+              <span class="tag">Tuesday</span>
+              <h3>Trails</h3>
+              <ul>
+                <li><strong>Time:</strong> 6:00 PM</li>
+                <li><strong>Distance:</strong> 4 – 5 Miles</li>
+                <li><strong>Pace:</strong> Fast / Moderate Groups</li>
+                <li><strong>Location:</strong> Griffy Lake Boat House</li>
+              </ul>
+            </div>
 
-        <!-- Wednesday Box -->
-        <div class="run-card">
-          <span class="tag">Wednesday</span>
-          <h3>Run and Friendly Beasts</h3>
-          <ul>
-            <li><strong>Time:</strong> 6:00 PM</li>
-            <li><strong>Distance:</strong> 1.5, 3, and 5 Mile options</li>
-            <li><strong>Pace:</strong> Casual / Walkers Welcome</li>
-            <li><strong>Location:</strong> Switchyard Park Pavilion</li>
-          </ul>
+            <!-- Wednesday Box -->
+            <div class="run-card">
+              <span class="tag">Wednesday</span>
+              <h3>Run and Friendly Beasts</h3>
+              <ul>
+                <li><strong>Time:</strong> 6:00 PM</li>
+                <li><strong>Distance:</strong> 1.5, 3, and 5 Mile options</li>
+                <li><strong>Pace:</strong> Casual / Walkers Welcome</li>
+                <li><strong>Location:</strong> Switchyard Park Pavilion</li>
+              </ul>
+            </div>
+          </div>
         </div>
-
+        <button class="carousel-button next" type="button" aria-label="Next run">›</button>
       </div>
     </section>
 
@@ -60,15 +64,14 @@
       <h2>Route Maps</h2>
       <p>Select a route to view its Strava map below.</p>
 
-      <div style="display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;">
-        <label for="route-select" style="color:var(--muted);font-weight:600;">Route:</label>
-        <select id="route-select" style="padding:0.5rem;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--text);">
+      <div class="route-select-row">
+        <select id="route-select" class="route-select">
           <option value="1.5">1.5 Mile</option>
           <option value="3">3 Mile</option>
           <option value="5">5 Mile</option>
           <option value="trail">Trail</option>
         </select>
-        <a id="route-open" class="photos-link" href="https://www.strava.com/routes/2978042905243243068" target="_blank" rel="noopener noreferrer">Open in Strava</a>
+           <a id="route-open" class="photos-link" href="https://www.strava.com/routes/2978042905243243068" target="_blank" rel="noopener noreferrer"></a>
       </div>
 
       <div class="strava-route-embed" id="strava-embed-container" style="margin-top:1rem;">
@@ -79,11 +82,40 @@
   
     <!-- Google Calendar Section -->
     <section class="schedule-card">
-    <h2>Calendar</h2>  
+      <h2>Calendar</h2>
       <div class="calendar-container">
         <iframe src="https://calendar.google.com/calendar/embed?src=f6f5276bd8d6423478ad5abba3d18c800d85a871124dbcc118df25c203534f7d%40group.calendar.google.com&ctz=America%2FIndiana%2FIndianapolis" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
       </div>
     </section>
+
+    <!-- Routing Photos Carousel Section (linked to Google Photos album) -->
+    <section class="schedule-card routing-photo-carousel-section">
+      <h2>Route Photos</h2>
+      <div class="photo-carousel routing-photo-carousel">
+        <button class="carousel-button prev" type="button" aria-label="Previous route photo">‹</button>
+        <div class="photo-track-wrapper" tabindex="0">
+          <div class="photo-track" id="routing-photo-track">
+            <div class="photo-slide">
+              <a href="https://photos.app.goo.gl/WdeoaKBJWkk8Tu4u8" target="_blank" rel="noopener noreferrer">
+                <img src="https://lh3.googleusercontent.com/pw/AP1GczNuOXbc00h6vkti3a8s6vXxz0S73giNn5ppC6z7E13Ka2An4LNJNLqR-SYcPiy3RTxD1iYroZmmAdv8f9Q1gBvevTnTn8yqvMMjqsYiIVTOOBvjww84" alt="Route photo 1">
+              </a>
+            </div>
+            <div class="photo-slide">
+              <a href="https://photos.app.goo.gl/WdeoaKBJWkk8Tu4u8" target="_blank" rel="noopener noreferrer">
+                <img src="https://lh3.googleusercontent.com/pw/AP1GczNXI_MI0ntIKSlp9NSs7hRz_28Q02jqQsbh8YpFv6D-j-NDYIJWIZrRtByfS2eKtAlVATWcGcSpBQf_GqTsTh3TPlg8ol_dFXHaeFZaIHPpu-boRWkg" alt="Route photo 2">
+              </a>
+            </div>
+            <div class="photo-slide">
+              <a href="https://photos.app.goo.gl/WdeoaKBJWkk8Tu4u8" target="_blank" rel="noopener noreferrer">
+                <img src="https://lh3.googleusercontent.com/pw/AP1GczPwQawe7o2FPxC-l4IDCA4sSptOFdOrO6QTdf6ft1R5tmKwhlOWUPkIN3OHTwvnO9MjpfmC2GOwC_U5CkU20uw3MxatsyN0H6ww11osPpxvXTQ0Wot6" alt="Route photo 3">
+              </a>
+            </div>
+          </div>
+        </div>
+        <button class="carousel-button next" type="button" aria-label="Next route photo">›</button>
+      </div>
+    </section>
+
 
   </main>
 
@@ -167,5 +199,215 @@
     })();
   </script>
   <script src="https://strava-embeds.com/embed.js" async defer></script>
+  <script>
+    (function(){
+      const carousel = document.querySelector('.runs-carousel');
+      if (!carousel) return;
+      const track = carousel.querySelector('.runs-grid');
+      const wrapper = carousel.querySelector('.carousel-track-wrapper');
+      const prev = carousel.querySelector('.carousel-button.prev');
+      const next = carousel.querySelector('.carousel-button.next');
+      const slides = Array.from(track.children);
+      let index = 0;
+
+      function updateCarousel() {
+        if (!slides.length) return;
+        slides.forEach((slide, slideIndex) => {
+          slide.classList.toggle('active', slideIndex === index);
+        });
+
+        const active = slides[index];
+        const wrapperWidth = wrapper.clientWidth;
+        const offset = active.offsetLeft + active.offsetWidth / 2 - wrapperWidth / 2;
+        const maxOffset = Math.max(0, track.scrollWidth - wrapperWidth);
+        const translateX = Math.min(Math.max(offset, 0), maxOffset);
+
+        track.style.transform = `translateX(-${translateX}px)`;
+        prev.disabled = index === 0;
+        next.disabled = index >= slides.length - 1;
+      }
+
+      prev.addEventListener('click', function() {
+        if (index > 0) {
+          index -= 1;
+          updateCarousel();
+        }
+      });
+
+      next.addEventListener('click', function() {
+        if (index < slides.length - 1) {
+          index += 1;
+          updateCarousel();
+        }
+      });
+
+      window.addEventListener('resize', updateCarousel);
+      updateCarousel();
+    })();
+  </script>
+  <script>
+    (function(){
+      const track = document.getElementById('photo-track');
+      if (!track) return;
+      const wrapper = track.parentElement;
+      const prev = document.querySelector('.photo-carousel .carousel-button.prev');
+      const next = document.querySelector('.photo-carousel .carousel-button.next');
+      const slides = Array.from(track.children);
+      let index = 0;
+
+      function updatePhotoCarousel() {
+        if (!slides.length) return;
+        slides.forEach((slide, slideIndex) => {
+          slide.classList.toggle('active', slideIndex === index);
+        });
+
+        const active = slides[index];
+        const wrapperWidth = wrapper.clientWidth;
+        const offset = active.offsetLeft + active.offsetWidth / 2 - wrapperWidth / 2;
+        const maxOffset = Math.max(0, track.scrollWidth - wrapperWidth);
+        const translateX = Math.min(Math.max(offset, 0), maxOffset);
+        track.style.transform = `translateX(-${translateX}px)`;
+
+        prev.disabled = index === 0;
+        next.disabled = index >= slides.length - 1;
+      }
+
+      prev.addEventListener('click', function() {
+        if (index > 0) {
+          index -= 1;
+          updatePhotoCarousel();
+        }
+      });
+
+      next.addEventListener('click', function() {
+        if (index < slides.length - 1) {
+          index += 1;
+          updatePhotoCarousel();
+        }
+      });
+
+      window.addEventListener('resize', updatePhotoCarousel);
+      updatePhotoCarousel();
+
+      const albumLink = document.getElementById('photos-album-link');
+      if (albumLink) {
+        albumLink.href = 'https://photos.app.goo.gl/WdeoaKBJWkk8Tu4u8';
+      }
+    })();
+  </script>
+  <script>
+    (function(){
+      // Auto-extract thumbnails from album_page.html and populate routing-photo-track
+      const albumLocal = 'album_page.html';
+      fetch(albumLocal).then(r => {
+        if (!r.ok) throw new Error('album_page.html not available');
+        return r.text();
+      }).then(text => {
+        const re = /https:\/\/lh3\.googleusercontent\.com[^\"'\s>]+/g;
+        const matches = Array.from(new Set(text.match(re) || []));
+        if (!matches.length) return;
+        const track = document.getElementById('routing-photo-track');
+        if (!track) return;
+        const max = 20;
+        const slides = matches.slice(0, max).map(u =>
+          `<div class="photo-slide"><a href="https://photos.app.goo.gl/WdeoaKBJWkk8Tu4u8" target="_blank" rel="noopener noreferrer"><img loading="lazy" src="${u}" alt=""></a></div>`
+        ).join('');
+        track.innerHTML = slides;
+        // Trigger layout update for carousel controllers
+        setTimeout(() => window.dispatchEvent(new Event('resize')), 60);
+      }).catch(err => {
+        console.warn('Could not fetch or parse album_page.html', err);
+      });
+    })();
+  </script>
+  <script>
+    (function(){
+      // Controller for the routing photo carousel (centering, prev/next)
+      const rTrack = document.getElementById('routing-photo-track');
+      if (rTrack) {
+        (function(){
+          const track = rTrack;
+          const wrapper = track.parentElement;
+          const prev = document.querySelector('.routing-photo-carousel .carousel-button.prev');
+          const next = document.querySelector('.routing-photo-carousel .carousel-button.next');
+          let slides = Array.from(track.children);
+          let index = 0;
+
+          function updateRoutingCarousel() {
+            // refresh slides list in case content changed
+            slides = Array.from(track.children);
+            if (!slides.length) return;
+            slides.forEach((slide, slideIndex) => {
+              slide.classList.toggle('active', slideIndex === index);
+            });
+
+            const active = slides[index];
+            const wrapperWidth = wrapper.clientWidth;
+            const offset = active.offsetLeft + active.offsetWidth / 2 - wrapperWidth / 2;
+            const maxOffset = Math.max(0, track.scrollWidth - wrapperWidth);
+            const translateX = Math.min(Math.max(offset, 0), maxOffset);
+            track.style.transform = `translateX(-${translateX}px)`;
+
+            prev.disabled = index === 0;
+            next.disabled = index >= slides.length - 1;
+          }
+
+          prev.addEventListener('click', function() { if (index > 0) { index -= 1; updateRoutingCarousel(); } });
+          next.addEventListener('click', function() { if (index < slides.length - 1) { index += 1; updateRoutingCarousel(); } });
+          window.addEventListener('resize', updateRoutingCarousel);
+          updateRoutingCarousel();
+        })();
+      }
+
+      function wireNavigation(wrapper){
+        if (!wrapper) return;
+        const carousel = wrapper.closest('.runs-carousel, .photo-carousel');
+        if (!carousel) return;
+        const prev = carousel.querySelector('.carousel-button.prev');
+        const next = carousel.querySelector('.carousel-button.next');
+        let startX = 0;
+        let curX = 0;
+        let dragging = false;
+        const threshold = 40;
+
+        wrapper.addEventListener('keydown', (e) => {
+          if (e.key === 'ArrowLeft') {
+            e.preventDefault();
+            if (prev) prev.click();
+          } else if (e.key === 'ArrowRight') {
+            e.preventDefault();
+            if (next) next.click();
+          }
+        });
+
+        wrapper.addEventListener('pointerdown', (e) => {
+          dragging = true;
+          startX = e.clientX;
+          curX = startX;
+          try { wrapper.setPointerCapture(e.pointerId); } catch (err) {}
+        });
+
+        wrapper.addEventListener('pointermove', (e) => {
+          if (!dragging) return;
+          curX = e.clientX;
+        });
+
+        wrapper.addEventListener('pointerup', (e) => {
+          if (!dragging) return;
+          dragging = false;
+          try { wrapper.releasePointerCapture(e.pointerId); } catch (err) {}
+          const dx = curX - startX;
+          if (Math.abs(dx) > threshold) {
+            if (dx < 0) { if (next) next.click(); }
+            else { if (prev) prev.click(); }
+          }
+        });
+
+        wrapper.addEventListener('pointercancel', () => { dragging = false; });
+      }
+
+      document.querySelectorAll('.carousel-track-wrapper, .photo-track-wrapper').forEach(wireNavigation);
+    })();
+  </script>
 </body>
 </html>

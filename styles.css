@@ -34,6 +34,16 @@ h2 { font-size: 1.5rem; margin-bottom: 1rem; }
   margin-bottom: 2.5rem;
 }
 
+.runs-carousel .runs-grid {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 0;
+}
+
+.carousel-section .runs-grid {
+  margin-bottom: 0;
+}
+
 .run-card {
   background: var(--card);
   border-radius: 12px;
@@ -59,8 +69,228 @@ h2 { font-size: 1.5rem; margin-bottom: 1rem; }
   text-transform: uppercase;
 }
 
-.run-card ul {
-  list-style: none;
+.runs-carousel {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+/* Photo carousel should mirror runs carousel styles and behavior */
+.photo-carousel {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+.photo-track-wrapper {
+  overflow: hidden;
+  width: 100%;
+}
+
+.carousel-track-wrapper {
+  overflow: hidden;
+  width: 100%;
+}
+
+.photo-track-wrapper {
+  overflow: hidden;
+  width: 100%;
+}
+
+.photo-track {
+  display: flex;
+  gap: 1rem;
+  transition: transform 0.35s ease;
+}
+
+.photo-slide {
+  min-width: 320px;
+  flex: 0 0 auto;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.14);
+}
+
+.photo-slide img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Enable JS swipe handling and a grab cursor for carousels */
+.carousel-track-wrapper,
+.photo-track-wrapper {
+  touch-action: pan-y;
+  cursor: grab;
+}
+
+.carousel-track-wrapper:active,
+.photo-track-wrapper:active {
+  cursor: grabbing;
+}
+
+.photo-carousel-caption {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.photos-link {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.carousel-track-wrapper .runs-grid {
+  transition: transform 0.35s ease;
+}
+
+.carousel-button {
+  background: var(--card);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  width: 3rem;
+  height: 3rem;
+  font-size: 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.carousel-button:hover {
+  background: rgba(142, 207, 79, 0.1);
+  transform: translateY(-1px);
+}
+
+.carousel-button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.runs-carousel .run-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+}
+
+.runs-carousel .run-card:not(.active) {
+  opacity: 0.85;
+}
+
+.runs-carousel .run-card.active {
+
+  box-shadow: 0 22px 40px rgba(0, 0, 0, 0.18);
+}
+
+@media (max-width: 900px) {
+  .runs-carousel .run-card {
+    min-width: 80vw;
+    max-width: 80vw;
+  }
+}
+
+@media (max-width: 600px) {
+  .runs-carousel {
+    gap: 0.75rem;
+  }
+
+  .carousel-button {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 860px) {
+  .runs-carousel {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: auto auto;
+    justify-items: center;
+    align-items: start;
+  }
+
+  .carousel-track-wrapper {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    width: 100%;
+  }
+
+  .carousel-button {
+    width: calc(50% - 0.5rem);
+    max-width: 220px;
+    justify-content: center;
+    margin: 0;
+    grid-row: 2;
+  }
+
+  .carousel-button.prev {
+    grid-column: 1;
+  }
+
+  .carousel-button.next {
+    grid-column: 2;
+  }
+}
+
+@media (max-width: 600px) {
+  .runs-carousel {
+    gap: 0.75rem;
+  }
+
+  .carousel-button {
+    width: calc(50% - 0.5rem);
+    max-width: none;
+  }
+}
+
+/* Mirror mobile button layout for photo carousel */
+@media (max-width: 860px) {
+  .photo-carousel {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: auto auto;
+    justify-items: center;
+    align-items: start;
+  }
+
+  .photo-track-wrapper {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    width: 100%;
+  }
+
+  .photo-carousel .carousel-button {
+    width: calc(50% - 0.5rem);
+    max-width: 220px;
+    justify-content: center;
+    margin: 0;
+    grid-row: 2;
+  }
+
+  .photo-carousel .carousel-button.prev {
+    grid-column: 1;
+  }
+
+  .photo-carousel .carousel-button.next {
+    grid-column: 2;
+  }
+}
+
+@media (max-width: 600px) {
+  .photo-carousel {
+    gap: 0.75rem;
+  }
+
+  .photo-carousel .carousel-button {
+    width: calc(50% - 0.5rem);
+    max-width: none;
+  }
+}
+
+.runs-carousel .run-card {
+  min-width: 280px;
+  flex: 0 0 auto;
 }
 
 .run-card li {
@@ -92,6 +322,27 @@ h2 { font-size: 1.5rem; margin-bottom: 1rem; }
   border-radius: 8px;
 }
 
+.route-select-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* route-select-label removed (unused) */
+
+.route-select {
+  min-width: 220px;
+  width: 320px;
+  max-width: 100%;
+  padding: 0.85rem 1rem;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--text);
+  font-size: 1rem;
+}
+
 .calendar-container iframe {
   position: absolute;
   top: 0;
@@ -101,49 +352,9 @@ h2 { font-size: 1.5rem; margin-bottom: 1rem; }
   border: 0;
 }
 
-.photos-section {
+
+.strava-section {
   margin-top: 2rem;
-}
-
-.photos-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1rem;
-  margin-top: 1rem;
-}
-
-.photo-card {
-  background: var(--card);
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  text-decoration: none;
-  color: inherit;
-  display: block;
-}
-
-.photo-card img {
-  width: 100%;
-  height: 220px;
-  object-fit: cover;
-  display: block;
-}
-
-.photo-card figcaption {
-  padding: 1rem;
-  color: var(--muted);
-  font-size: 0.95rem;
-}
-
-.photos-link {
-  display: inline-block;
-  margin: 0.5rem 0 1rem;
-  padding: 0.7rem 1rem;
-  background: var(--primary);
-  color: #07203b;
-  border-radius: 999px;
-  text-decoration: none;
-  font-weight: 600;
 }
 
 .strava-section {
@@ -191,10 +402,4 @@ h2 { font-size: 1.5rem; margin-bottom: 1rem; }
   min-height: 420px;
   border: 0;
   border-radius: 8px;
-}
-
-@media (max-width: 600px) {
-  .calendar-container {
-    padding-bottom: 125%; /* Taller aspect ratio for mobile screens */
-  }
 }
