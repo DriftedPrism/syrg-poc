@@ -8,7 +8,7 @@
 <body>
 
   <header>
-    <img class="site-logo" src="syrg-logo.jpg" alt="SYRG logo">
+    <img class="site-logo" src="syrg-logo.png" alt="SYRG logo">
   </header>
   <main>
     <!-- Weekly Run Boxes Section -->
@@ -105,6 +105,7 @@
         div.className = 'strava-embed-placeholder';
         div.setAttribute('data-embed-type', 'route');
         div.setAttribute('data-embed-id', id);
+        div.setAttribute('data-full-width', 'true');
         div.setAttribute('data-style', 'standard');
         div.setAttribute('data-from-embed', 'true');
         return div;
