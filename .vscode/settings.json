@@ -1,0 +1,8 @@
+{
+  "terminal.integrated.env.windows": {
+    "PATH": "${env:PATH};C:\\Program Files\\nodejs"
+},
+"chat.tools.terminal.autoApprove": {
+    "&": true
+}
+}

@@ -11,8 +11,15 @@
     <img class="site-logo" src="syrg-logo.png" alt="SYRG logo">
   </header>
   <main>
+    <!-- About Us Section -->
+    <section class="schedule-card about-section">
+      <h2>About Us</h2>
+      <p>SYRG is a community-focused running group centered around Switchyard Park and the surrounding trails. We welcome runners of all paces and distances, with a mix of social runs, trail outings, and casual gatherings.</p>
+      <p>Our weekly schedule is designed to offer flexibility and consistency, so everyone can join at their comfort level and enjoy the local routes.</p>
+    </section>
+
     <!-- Weekly Run Boxes Carousel Section -->
-    <section class="carousel-section">
+    <section class="schedule-card carousel-section">
       <h2>Weekly Schedule</h2>
       <div class="runs-carousel">
         <button class="carousel-button prev" type="button" aria-label="Previous run">‹</button>
@@ -84,38 +91,40 @@
     <section class="schedule-card">
       <h2>Calendar</h2>
       <div class="calendar-container">
-        <iframe src="https://calendar.google.com/calendar/embed?src=f6f5276bd8d6423478ad5abba3d18c800d85a871124dbcc118df25c203534f7d%40group.calendar.google.com&ctz=America%2FIndiana%2FIndianapolis" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+        <iframe src="https://calendar.google.com/calendar/embed?src=f6f5276bd8d6423478ad5abba3d18c800d85a871124dbcc118df25c203534f7d%40group.calendar.google.com&ctz=America%2FIndiana%2FIndianapolis" style="border: 0" frameborder="0" scrolling="no"></iframe>
       </div>
     </section>
 
-    <!-- Routing Photos Carousel Section (linked to Google Photos album) -->
-    <section class="schedule-card routing-photo-carousel-section">
-      <h2>Route Photos</h2>
-      <div class="photo-carousel routing-photo-carousel">
-        <button class="carousel-button prev" type="button" aria-label="Previous route photo">‹</button>
-        <div class="photo-track-wrapper" tabindex="0">
-          <div class="photo-track" id="routing-photo-track">
-            <div class="photo-slide">
-              <a href="https://photos.app.goo.gl/WdeoaKBJWkk8Tu4u8" target="_blank" rel="noopener noreferrer">
-                <img src="https://lh3.googleusercontent.com/pw/AP1GczNuOXbc00h6vkti3a8s6vXxz0S73giNn5ppC6z7E13Ka2An4LNJNLqR-SYcPiy3RTxD1iYroZmmAdv8f9Q1gBvevTnTn8yqvMMjqsYiIVTOOBvjww84" alt="Route photo 1">
-              </a>
-            </div>
-            <div class="photo-slide">
-              <a href="https://photos.app.goo.gl/WdeoaKBJWkk8Tu4u8" target="_blank" rel="noopener noreferrer">
-                <img src="https://lh3.googleusercontent.com/pw/AP1GczNXI_MI0ntIKSlp9NSs7hRz_28Q02jqQsbh8YpFv6D-j-NDYIJWIZrRtByfS2eKtAlVATWcGcSpBQf_GqTsTh3TPlg8ol_dFXHaeFZaIHPpu-boRWkg" alt="Route photo 2">
-              </a>
-            </div>
-            <div class="photo-slide">
-              <a href="https://photos.app.goo.gl/WdeoaKBJWkk8Tu4u8" target="_blank" rel="noopener noreferrer">
-                <img src="https://lh3.googleusercontent.com/pw/AP1GczPwQawe7o2FPxC-l4IDCA4sSptOFdOrO6QTdf6ft1R5tmKwhlOWUPkIN3OHTwvnO9MjpfmC2GOwC_U5CkU20uw3MxatsyN0H6ww11osPpxvXTQ0Wot6" alt="Route photo 3">
-              </a>
-            </div>
-          </div>
-        </div>
-        <button class="carousel-button next" type="button" aria-label="Next route photo">›</button>
-      </div>
+    <!-- Shop Section -->
+    <section class="schedule-card shop-section">
+      <h2>Shop</h2>
+      <p>ItemOrder blocks embedding on this page, so open the shop directly in a new tab.</p>
+      <p><a href="https://syrgswitchardprg.itemorder.com/shop/home/" target="_blank" rel="noopener noreferrer">Open SYRG shop</a></p>
     </section>
 
+    <!-- Other Runs Groups -->
+    <section class="schedule-card other-runs-section">
+      <h2>Other Runs Groups</h2>
+      <p>Explore more local running groups and events in the area:</p>
+      <ul class="other-runs-list">
+        <li><a href="https://www.strava.com/clubs" target="_blank" rel="noopener noreferrer">Strava Clubs</a></li>
+        <li><a href="https://www.meetup.com/topics/running/" target="_blank" rel="noopener noreferrer">Local Meetup Running Groups</a></li>
+        <li><a href="https://www.runnersworld.com/running-clubs/" target="_blank" rel="noopener noreferrer">Runner's World Club Listings</a></li>
+      </ul>
+    </section>
+
+    <!-- Contact Us -->
+    <section class="schedule-card contact-section">
+      <h2>Contact Us</h2>
+      <p>Email: <a href="mailto:info@syrg-run.com">info@syrg-run.com</a></p>
+      <p>Questions? Reach out for pace group info, route changes, or group invites.</p>
+      <h3>Socials</h3>
+      <ul class="social-links">
+        <li><a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+        <li><a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+        <li><a href="https://www.strava.com" target="_blank" rel="noopener noreferrer">Strava</a></li>
+      </ul>
+    </section>
 
   </main>
 
@@ -361,7 +370,7 @@
 
       function wireNavigation(wrapper){
         if (!wrapper) return;
-        const carousel = wrapper.closest('.runs-carousel, .photo-carousel');
+        const carousel = wrapper.closest('.runs-carousel');
         if (!carousel) return;
         const prev = carousel.querySelector('.carousel-button.prev');
         const next = carousel.querySelector('.carousel-button.next');
@@ -406,7 +415,7 @@
         wrapper.addEventListener('pointercancel', () => { dragging = false; });
       }
 
-      document.querySelectorAll('.carousel-track-wrapper, .photo-track-wrapper').forEach(wireNavigation);
+      document.querySelectorAll('.carousel-track-wrapper').forEach(wireNavigation);
     })();
   </script>
 </body>

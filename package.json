@@ -3,9 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "fetch-album": "node scripts/fetch_album.js"
   },
   "dependencies": {
-    "node-fetch": "^3.4.0"
+    "node-fetch": "^3.3.2"
   }
 }
