@@ -95,6 +95,22 @@
       </div>
     </section>
 
+    <!-- Photos Section -->
+    <section class="schedule-card photos-section">
+      <h2>Photos</h2>
+      <p>Slideshow generated from the SYRG Google Photos album.</p>
+      <div class="photo-carousel">
+        <button class="carousel-button prev" type="button" aria-label="Previous photo">‹</button>
+        <div class="photo-track-wrapper" tabindex="0">
+          <div class="photo-track" id="photos-track">
+            <div class="photo-slide placeholder">Loading photos…</div>
+          </div>
+        </div>
+        <button class="carousel-button next" type="button" aria-label="Next photo">›</button>
+      </div>
+      <p><a id="photos-album-link" class="photos-link" href="#" target="_blank" rel="noopener noreferrer">View the full album on Google Photos</a></p>
+    </section>
+
     <!-- Shop Section -->
     <section class="schedule-card shop-section">
       <h2>Shop</h2>
@@ -256,13 +272,18 @@
   </script>
   <script>
     (function(){
-      const track = document.getElementById('photo-track');
+      const albumUrl = 'https://photos.app.goo.gl/WdeoaKBJWkk8Tu4u8';
+      const track = document.getElementById('photos-track');
       if (!track) return;
       const wrapper = track.parentElement;
       const prev = document.querySelector('.photo-carousel .carousel-button.prev');
       const next = document.querySelector('.photo-carousel .carousel-button.next');
-      const slides = Array.from(track.children);
+      const albumLink = document.getElementById('photos-album-link');
+      const fadeMode = true;
+      const autoplayDelay = 4500;
+      let slides = Array.from(track.children);
       let index = 0;
+      let autoplayTimer = null;
 
       function updatePhotoCarousel() {
         if (!slides.length) return;
@@ -270,21 +291,70 @@
           slide.classList.toggle('active', slideIndex === index);
         });
 
-        const active = slides[index];
-        const wrapperWidth = wrapper.clientWidth;
-        const offset = active.offsetLeft + active.offsetWidth / 2 - wrapperWidth / 2;
-        const maxOffset = Math.max(0, track.scrollWidth - wrapperWidth);
-        const translateX = Math.min(Math.max(offset, 0), maxOffset);
-        track.style.transform = `translateX(-${translateX}px)`;
+        if (!fadeMode) {
+          const active = slides[index];
+          const wrapperWidth = wrapper.clientWidth;
+          const offset = active.offsetLeft + active.offsetWidth / 2 - wrapperWidth / 2;
+          const maxOffset = Math.max(0, track.scrollWidth - wrapperWidth);
+          const translateX = Math.min(Math.max(offset, 0), maxOffset);
+          track.style.transform = `translateX(-${translateX}px)`;
+        } else {
+          track.style.transform = 'none';
+        }
 
         prev.disabled = index === 0;
         next.disabled = index >= slides.length - 1;
+      }
+
+      function setAlbumLink() {
+        if (!albumLink) return;
+        albumLink.href = albumUrl;
+      }
+
+      function startAutoplay() {
+        stopAutoplay();
+        if (!slides.length) return;
+        autoplayTimer = window.setInterval(() => {
+          index = (index + 1) % slides.length;
+          updatePhotoCarousel();
+        }, autoplayDelay);
+      }
+
+      function stopAutoplay() {
+        if (autoplayTimer !== null) {
+          clearInterval(autoplayTimer);
+          autoplayTimer = null;
+        }
+      }
+
+      function loadPhotos() {
+        fetch('photos.json')
+          .then(response => {
+            if (!response.ok) throw new Error('photos.json not available');
+            return response.json();
+          })
+          .then(photoUrls => {
+            if (!Array.isArray(photoUrls) || !photoUrls.length) return;
+            const slidesHtml = photoUrls.slice(0, 20).map((src, index) =>
+              `<div class="photo-slide"><a href="${albumUrl}" target="_blank" rel="noopener noreferrer"><img loading="lazy" src="${src}" alt="SYRG photo ${index + 1}"></a></div>`
+            ).join('');
+            track.innerHTML = slidesHtml;
+            track.classList.add('fade-mode');
+            slides = Array.from(track.children);
+            index = 0;
+            updatePhotoCarousel();
+            startAutoplay();
+          })
+          .catch(err => {
+            console.warn('Could not load photos.json', err);
+          });
       }
 
       prev.addEventListener('click', function() {
         if (index > 0) {
           index -= 1;
           updatePhotoCarousel();
+          startAutoplay();
         }
       });
 
@@ -292,82 +362,19 @@
         if (index < slides.length - 1) {
           index += 1;
           updatePhotoCarousel();
+          startAutoplay();
         }
       });
 
       window.addEventListener('resize', updatePhotoCarousel);
-      updatePhotoCarousel();
-
-      const albumLink = document.getElementById('photos-album-link');
-      if (albumLink) {
-        albumLink.href = 'https://photos.app.goo.gl/WdeoaKBJWkk8Tu4u8';
-      }
+      window.addEventListener('focus', startAutoplay);
+      window.addEventListener('blur', stopAutoplay);
+      setAlbumLink();
+      loadPhotos();
     })();
   </script>
   <script>
     (function(){
-      // Auto-extract thumbnails from album_page.html and populate routing-photo-track
-      const albumLocal = 'album_page.html';
-      fetch(albumLocal).then(r => {
-        if (!r.ok) throw new Error('album_page.html not available');
-        return r.text();
-      }).then(text => {
-        const re = /https:\/\/lh3\.googleusercontent\.com[^\"'\s>]+/g;
-        const matches = Array.from(new Set(text.match(re) || []));
-        if (!matches.length) return;
-        const track = document.getElementById('routing-photo-track');
-        if (!track) return;
-        const max = 20;
-        const slides = matches.slice(0, max).map(u =>
-          `<div class="photo-slide"><a href="https://photos.app.goo.gl/WdeoaKBJWkk8Tu4u8" target="_blank" rel="noopener noreferrer"><img loading="lazy" src="${u}" alt=""></a></div>`
-        ).join('');
-        track.innerHTML = slides;
-        // Trigger layout update for carousel controllers
-        setTimeout(() => window.dispatchEvent(new Event('resize')), 60);
-      }).catch(err => {
-        console.warn('Could not fetch or parse album_page.html', err);
-      });
-    })();
-  </script>
-  <script>
-    (function(){
-      // Controller for the routing photo carousel (centering, prev/next)
-      const rTrack = document.getElementById('routing-photo-track');
-      if (rTrack) {
-        (function(){
-          const track = rTrack;
-          const wrapper = track.parentElement;
-          const prev = document.querySelector('.routing-photo-carousel .carousel-button.prev');
-          const next = document.querySelector('.routing-photo-carousel .carousel-button.next');
-          let slides = Array.from(track.children);
-          let index = 0;
-
-          function updateRoutingCarousel() {
-            // refresh slides list in case content changed
-            slides = Array.from(track.children);
-            if (!slides.length) return;
-            slides.forEach((slide, slideIndex) => {
-              slide.classList.toggle('active', slideIndex === index);
-            });
-
-            const active = slides[index];
-            const wrapperWidth = wrapper.clientWidth;
-            const offset = active.offsetLeft + active.offsetWidth / 2 - wrapperWidth / 2;
-            const maxOffset = Math.max(0, track.scrollWidth - wrapperWidth);
-            const translateX = Math.min(Math.max(offset, 0), maxOffset);
-            track.style.transform = `translateX(-${translateX}px)`;
-
-            prev.disabled = index === 0;
-            next.disabled = index >= slides.length - 1;
-          }
-
-          prev.addEventListener('click', function() { if (index > 0) { index -= 1; updateRoutingCarousel(); } });
-          next.addEventListener('click', function() { if (index < slides.length - 1) { index += 1; updateRoutingCarousel(); } });
-          window.addEventListener('resize', updateRoutingCarousel);
-          updateRoutingCarousel();
-        })();
-      }
-
       function wireNavigation(wrapper){
         if (!wrapper) return;
         const carousel = wrapper.closest('.runs-carousel');
@@ -415,7 +422,7 @@
         wrapper.addEventListener('pointercancel', () => { dragging = false; });
       }
 
-      document.querySelectorAll('.carousel-track-wrapper').forEach(wireNavigation);
+      document.querySelectorAll('.carousel-track-wrapper, .photo-track-wrapper').forEach(wireNavigation);
     })();
   </script>
 </body>
