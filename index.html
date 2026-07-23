@@ -88,11 +88,12 @@
 
   
     <!-- Google Calendar Section -->
-    <section class="schedule-card">
+    <section class="schedule-card calendar-section">
       <h2>Calendar</h2>
       <div class="calendar-container">
         <iframe src="https://calendar.google.com/calendar/embed?src=f6f5276bd8d6423478ad5abba3d18c800d85a871124dbcc118df25c203534f7d%40group.calendar.google.com&ctz=America%2FIndiana%2FIndianapolis" style="border: 0" frameborder="0" scrolling="no"></iframe>
       </div>
+      <p class="calendar-hint">On mobile, click the “+” to subscribe to the calendar.</p>
     </section>
 
     <!-- Photos Section -->
@@ -108,7 +109,7 @@
         </div>
         <button class="carousel-button next" type="button" aria-label="Next photo">›</button>
       </div>
-      <p><a id="photos-album-link" class="photos-link" href="#" target="_blank" rel="noopener noreferrer">View the full album on Google Photos</a></p>
+      <p><a id="photos-album-link" class="photos-link" href="#" target="_blank" rel="noopener noreferrer"></a></p>
     </section>
 
     <!-- Shop Section -->
@@ -377,7 +378,7 @@
     (function(){
       function wireNavigation(wrapper){
         if (!wrapper) return;
-        const carousel = wrapper.closest('.runs-carousel');
+        const carousel = wrapper.closest('.runs-carousel, .photo-carousel');
         if (!carousel) return;
         const prev = carousel.querySelector('.carousel-button.prev');
         const next = carousel.querySelector('.carousel-button.next');

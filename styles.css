@@ -10,19 +10,19 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: var(--bg); color: var(--text); line-height: 1.6; }
 
-header { text-align: center; padding: 3rem 1rem 0.9rem; background: linear-gradient(180deg, #f2fbff 0%, #ffffff 100%); }
+header { text-align: center; padding: 3rem 1rem 1.25rem; background: linear-gradient(180deg, #f2fbff 0%, #ffffff 100%); }
 header h1 { font-size: 2.5rem; color: var(--primary); margin-bottom: 0.5rem; }
 header p { color: var(--muted); font-size: 1.1rem; }
 
 .site-logo {
   display: block;
-  margin: 0 auto 0.6rem;
+  margin: 0 auto 0.9rem;
   max-width: 320px;
   width: 100%;
   height: auto;
 }
 
-main { max-width: 900px; margin: 0 auto; padding: 1rem 1rem; }
+main { max-width: 900px; margin: 0 auto; padding: 1.5rem 1rem; }
 
 h2 { font-size: 1.5rem; margin-bottom: 1rem; }
 
@@ -37,11 +37,12 @@ h2 { font-size: 1.5rem; margin-bottom: 1rem; }
 .runs-carousel .runs-grid {
   display: flex;
   gap: 1rem;
-  margin-bottom: 0;
+  margin-top: 8px;
+
 }
 
 .carousel-section .runs-grid {
-  margin-bottom: 0;
+  margin-bottom: 8px;
 }
 
 .run-card {
@@ -364,6 +365,13 @@ h2 { font-size: 1.5rem; margin-bottom: 1rem; }
   border-radius: 8px;
 }
 
+.calendar-hint {
+  display: none;
+  margin-top: 0.85rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
 .route-select-row {
   display: flex;
   align-items: center;
@@ -409,6 +417,12 @@ h2 { font-size: 1.5rem; margin-bottom: 1rem; }
 @media (max-width: 700px) {
   .contact-socials {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .calendar-hint {
+    display: block;
   }
 }
 
